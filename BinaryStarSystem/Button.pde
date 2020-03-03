@@ -29,7 +29,7 @@ class Button {
   
   void mousePressed(){ //trigger event
     if(mouseIsOver()){ //check the mouse is over the button
-      reloadScale(); //call the reload scale method in Meteorites class
+      //event
     }
   }
   
