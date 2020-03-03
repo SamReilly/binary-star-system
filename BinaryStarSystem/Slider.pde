@@ -55,7 +55,6 @@ class Slider {
       selected1 = true; //select this slider for movement
       tempMousePosX = pmouseX; //Store mouse x position
       tempBoxPosX = xPos; //Store temporary constant x position
-      
     }
   }
   
