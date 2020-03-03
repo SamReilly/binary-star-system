@@ -87,3 +87,8 @@ class Slider {
     return pow(10, (normalisedValue*8));
   }
 }
+
+/* TOOO:
+- Fix right hand slider stopper (currently slides off the sldier)
+
+*/
