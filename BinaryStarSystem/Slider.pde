@@ -69,6 +69,8 @@ class Slider {
       //check boundaries
       if((tempBoxPosX+dx)<anchorX){ //lower bound
         xPos = anchorX;
+      } else if((tempBoxPosX+dx)>(anchorX+sliderWidth)){
+        xPos = anchorX+sliderWidth;
       } else {
         xPos = tempBoxPosX + dx;
       }

@@ -1,10 +1,10 @@
 PFont font;
 PImage background;
 
-SpacialBody body1;
-SpacialBody body2;
 Slider slider1;
 Slider slider2;
+
+SpacialSystem spaceSystem;
 
 color Colour;
 
@@ -12,18 +12,16 @@ void setup(){
   size(1280, 720);
   
   Colour = color(255, 0, 0);
-  body1 = new SpacialBody(100, "Body1", Colour, 100, 100);
-  body2 = new SpacialBody(100, "Body2", Colour, 100, 200);
+  spaceSystem = new SpacialSystem(3);
   
-  slider1 = new Slider(200, 200);
-  slider2 = new Slider(100, 200);
+  slider1 = new Slider(25, 975);
+  slider2 = new Slider(65, 975);
 }
 
 void draw(){
   background(200);
   
-  body1.display();
-  body2.display();
+  spaceSystem.display();
   
   slider1.display();
   slider2.display();
