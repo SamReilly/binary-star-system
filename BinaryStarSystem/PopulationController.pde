@@ -1,3 +1,4 @@
+//Controls number of spacial bodies in current use
 class PopulationController {
   
   float posX, posY; //anchor positions of the top left corner of the object

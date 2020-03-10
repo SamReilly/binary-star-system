@@ -1,18 +1,16 @@
+//global objects
 PFont font;
 PImage background;
-
 Slider slider1;
 Slider slider2;
-
 SpacialSystem spaceSystem;
-
 color Colour;
 
 void setup(){
   size(1280, 720);
   
   Colour = color(255, 0, 0);
-  spaceSystem = new SpacialSystem(3);
+  spaceSystem = new SpacialSystem(2);
   
   slider1 = new Slider(25, 975);
   slider2 = new Slider(65, 975);
