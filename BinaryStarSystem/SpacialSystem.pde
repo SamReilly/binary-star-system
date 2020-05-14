@@ -9,15 +9,9 @@ class SpacialSystem {
   
   public SpacialSystem(int n){
     bodiesArray = new SpacialBody[n];
-    for(int i=0; i<n; i++){
-      float randomX = (width/2)+random.nextInt(400)-200;
-      float randomY = (height/2)+random.nextInt(400)-200;
-      bodiesArray[i] = new SpacialBody(100, "Body", Colour, randomX, randomY, this);
-    }
-    /*
+    
     bodiesArray[0] = new SpacialBody(100, "Body", Colour, width/2, (height/2)+100, this);
-    bodiesArray[1] = new SpacialBody(100, "Body", Colour, width/2, (height/2)-100, this);
-    */
+    bodiesArray[1] = new SpacialBody(150, "Body", Colour, width/2, (height/2)-100, this);
   }
   
   public void display(){
