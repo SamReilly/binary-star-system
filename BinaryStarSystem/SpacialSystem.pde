@@ -4,6 +4,7 @@ class SpacialSystem {
   
   private SpacialBody[] bodiesArray;
   private float centreX, centreY;
+  private PVector COMVector;
   private Random random = new Random();
   
   public SpacialSystem(int n){
@@ -19,6 +20,7 @@ class SpacialSystem {
     calcCoM(); //first, calculate the new centre of mass for this frame
     displayCoM();
     for(int i=0; i<bodiesArray.length; i++){
+      bodiesArray[i].calculateNewAcceleration(COMVector);
       bodiesArray[i].display();
     }
   }
@@ -39,6 +41,7 @@ class SpacialSystem {
     }
     centreX = fracTopX/fracBottomX; //set the two variables
     centreY = fracTopY/fracBottomY;
+    COMVector = new PVector(centreX, centreY);
   }
   
   private void displayCoM(){ //displays the centre of mass as a cross on the screen

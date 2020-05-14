@@ -64,9 +64,23 @@ class SpacialBody{
     fill(colour);
     
     velocity.add(acceleration); //set the new velocity
+    
+    //Find the orbit vector for next frame
+    PVector COMPos = new PVector();
+    PVector force = new PVector();
+    
     posX+=velocity.x; //set the new position based on the new velocity
     posY+=velocity.y;
     
     ellipse(posX, posY, dia, dia); //draw the point
+  }
+  
+  public void calculateNewAcceleration(PVector COM){ //sets a new acceleration into the global variable
+    //calculate force vector caused by the centre of mass
+    
+    
+    //calculate the acceleration due to that force vector
+    
+    //set the acceleration vector to global variable
   }
 }
