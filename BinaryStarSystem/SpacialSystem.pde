@@ -9,18 +9,23 @@ class SpacialSystem {
   
   public SpacialSystem(int n){
     bodiesArray = new SpacialBody[n];
-    for(int i=0; i<n; i++){
+    /*for(int i=0; i<n; i++){
       float randomX = (width/2)+random.nextInt(400)-200;
       float randomY = (height/2)+random.nextInt(400)-200;
-      bodiesArray[i] = new SpacialBody(100, "Body", Colour, randomX, randomY);
-    }
+      bodiesArray[i] = new SpacialBody(100, "Body", Colour, randomX, randomY, this);
+    }*/
+    bodiesArray[0] = new SpacialBody(100, "Body", Colour, width/2, (height/2)+100, this);
+    bodiesArray[1] = new SpacialBody(100, "Body", Colour, width/2, (height/2)-100, this);
   }
   
   public void display(){
+    System.out.println("New Frame");
     calcCoM(); //first, calculate the new centre of mass for this frame
-    displayCoM();
+    displayCoM(); //set the new coordinates of the centre of mass cross
     for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].calculateNewAcceleration(COMVector);
+    }
+    for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].display();
     }
   }
@@ -47,5 +52,13 @@ class SpacialSystem {
   private void displayCoM(){ //displays the centre of mass as a cross on the screen
     line(centreX, centreY-10, centreX, centreY+10);
     line(centreX-10, centreY, centreX+10, centreY);
+  }
+  
+  public float getSystemMass() {
+    float totalMass = 0;
+    for(int i=0; i<bodiesArray.length; i++){
+      totalMass += bodiesArray[i].getMass();
+    }
+    return totalMass;
   }
 }
