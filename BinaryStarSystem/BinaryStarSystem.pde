@@ -6,11 +6,18 @@ Slider slider2;
 SpacialSystem spaceSystem;
 color Colour;
 
+int numberOfStars = 2;
+
 void setup(){
   size(1280, 720);
   
+  //moved to method for ability to call when reloading the scene
+  systemSetup(); 
+}
+
+void systemSetup() {
   Colour = color(255, 0, 0);
-  spaceSystem = new SpacialSystem(2);
+  spaceSystem = new SpacialSystem(numberOfStars); //create a new system with 
   
   slider1 = new Slider(25, 975);
   slider2 = new Slider(65, 975);

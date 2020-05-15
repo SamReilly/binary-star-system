@@ -15,7 +15,6 @@ class SpacialSystem {
   }
   
   public void display(){
-    System.out.println("New Frame");
     calcCoM(); //first, calculate the new centre of mass for this frame
     displayCoM(); //set the new coordinates of the centre of mass cross
     for(int i=0; i<bodiesArray.length; i++){

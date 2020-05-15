@@ -87,7 +87,6 @@ class SpacialBody{
   //sets a new acceleration into the global variable
   public void calculateNewAcceleration(PVector COM){ 
     PVector thisCOM = new PVector(COM.x, COM.y); //create new instance of COM vector to not modify main one
-    System.out.println("Calculating new acceleration");
     //calculate force vector caused by the centre of mass
     //F = gmm/r^2
     final float g = 1; //to be changed
