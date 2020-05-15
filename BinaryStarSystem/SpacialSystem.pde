@@ -5,7 +5,6 @@ class SpacialSystem {
   private SpacialBody[] bodiesArray;
   private float centreX, centreY;
   private PVector COMVector;
-  private Random random = new Random();
   
   public SpacialSystem(int n){
     bodiesArray = new SpacialBody[n];

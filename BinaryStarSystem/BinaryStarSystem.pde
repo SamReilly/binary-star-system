@@ -1,8 +1,7 @@
 //global objects
 PFont font;
 PImage background;
-Slider slider1;
-Slider slider2;
+Slider[] sliders;
 SpacialSystem spaceSystem;
 color Colour;
 
@@ -19,8 +18,10 @@ void systemSetup() {
   Colour = color(255, 0, 0);
   spaceSystem = new SpacialSystem(numberOfStars); //create a new system with 
   
-  slider1 = new Slider(25, 975);
-  slider2 = new Slider(65, 975);
+  sliders = new Slider[numberOfStars];
+  for(int i=0; i<sliders.length; i++){
+    sliders[i] = new Slider(25+40*i, 975);
+  }
 }
 
 void draw(){
@@ -28,23 +29,27 @@ void draw(){
   
   spaceSystem.display();
   
-  slider1.display();
-  slider2.display();
+  for(int i=0; i<sliders.length; i++){
+    sliders[i].display();
+  }
 }
 
 void mousePressed() { //executes on click
-  slider1.mousePressed();
-  slider2.mousePressed();
+  for(int i=0; i<sliders.length; i++){
+    sliders[i].mousePressed();
+  }
 }
 
 void mouseReleased() { //executes on release
-  slider1.mouseReleased();
-  slider2.mouseReleased();
+  for(int i=0; i<sliders.length; i++){
+    sliders[i].mouseReleased();
+  }
 }
 
 void mouseDragged() { //executes when cursor is dragged anywhere
-  slider1.mouseDragged();
-  slider2.mouseDragged();
+  for(int i=0; i<sliders.length; i++){
+    sliders[i].mouseDragged();
+  }
 }
 
 void keyPressed() { //save screenshot of current output
