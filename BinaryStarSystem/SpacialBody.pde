@@ -6,7 +6,6 @@ class SpacialBody{
   
   //object data
   private float posX, posY;
-  private float dia;
   private PVector velocity;
   private PVector acceleration;
   private SpacialSystem thisSystem;
@@ -17,7 +16,6 @@ class SpacialBody{
     this.colour = colour;
     this.posX = posX;
     this.posY = posY;
-    this.dia = findDiameter();
     this.velocity = findStartingVelocity();
     this.acceleration = PVector.random2D().mult(0);
     this.thisSystem = thisSystem;
@@ -39,6 +37,11 @@ class SpacialBody{
     posY = Y;
   }
   
+  public void movePosition(PVector shift){
+    posX -= shift.x;
+    posY -= shift.y;
+  }
+  
   public float getPosX(){
     return this.posX;
   }
@@ -49,7 +52,6 @@ class SpacialBody{
   
   public void setMass(float mass){
     this.mass = mass;
-    this.dia = findDiameter();
   }
   
   public float getMass(){
@@ -60,20 +62,11 @@ class SpacialBody{
     return this.name;
   }
   
-  private float findDiameter(){
-    //TODO: connect diameter to mass
-    return 10.0f;
-  }
-  
   public void setBodyName(String name){
     this.name = name;
   }
   
-  public void setColour(color colour){
-    this.colour = colour;
-  }
-  
-  public void display(){
+  public void display(){ //called every frame
     fill(colour);
     
     velocity.add(acceleration); //set the new velocity
@@ -81,7 +74,7 @@ class SpacialBody{
     posX+=velocity.x; //set the new position based on the new velocity
     posY+=velocity.y;
     
-    ellipse(posX, posY, dia, dia); //draw the resultant point
+    ellipse(posX, posY, mass/15, mass/15); //draw the resultant point
   }
   
   //sets a new acceleration into the global variable
@@ -111,7 +104,7 @@ class SpacialBody{
   }
   
   private void drawVector(PVector input){
-    fill(0);
+    stroke(0);
     line(posX, posY, posX+(input.x*30), posY+(input.y*30));
   }
 }

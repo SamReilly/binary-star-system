@@ -1,43 +1,70 @@
-//global objects
+//global variables
 PFont font;
 PImage background;
 Slider[] sliders;
+float[] sliderValues;
 SpacialSystem spaceSystem;
 color Colour;
+ButtonSetMass buttonSetMass;
+ButtonSetCentre buttonSetCentre;
+ButtonReset buttonReset;
 
 int numberOfStars = 2;
 
 void setup(){
+  frameRate(60);
   size(1280, 720);
+  Colour = color(255, 0, 0);
+  buttonSetMass = new ButtonSetMass("Set Mass", 10, 10);
+  buttonSetCentre = new ButtonSetCentre("Toggle Follow", 10, 40);
+  buttonReset = new ButtonReset("Reset Scene", 10, 70);
   
   //moved to method for ability to call when reloading the scene
   systemSetup(); 
 }
 
 void systemSetup() {
-  Colour = color(255, 0, 0);
-  spaceSystem = new SpacialSystem(numberOfStars); //create a new system with 
+  spaceSystem = new SpacialSystem(numberOfStars); //create a new system with x number of stars
   
   sliders = new Slider[numberOfStars];
+  sliderValues = new float[numberOfStars];
   for(int i=0; i<sliders.length; i++){
-    sliders[i] = new Slider(25+40*i, 975);
+    sliders[i] = new Slider(25+40*i, 975, 1000);
   }
+  setMasses();
 }
 
-void draw(){
+void reset(){
+  systemSetup();
+}
+
+void setMasses() {
+  for(int i=0; i<sliders.length; i++){
+    sliderValues[i] = sliders[i].getSlider();
+  }
+  spaceSystem.setMasses(sliderValues); //send the mass values to the spacial system
+}
+
+void draw(){ //called every frame
   background(200);
   
   spaceSystem.display();
-  
   for(int i=0; i<sliders.length; i++){
     sliders[i].display();
   }
+  
+  buttonSetMass.display();
+  buttonSetCentre.display();
+  buttonReset.display();
 }
 
 void mousePressed() { //executes on click
   for(int i=0; i<sliders.length; i++){
     sliders[i].mousePressed();
   }
+  buttonSetMass.mousePressed();
+  buttonSetCentre.mousePressed();
+  buttonReset.mousePressed();
 }
 
 void mouseReleased() { //executes on release
@@ -57,5 +84,13 @@ void keyPressed() { //save screenshot of current output
      println("Saving...");
      save("output.png");
      println("Done saving");
+  }
+}
+
+void toggleCentre() {
+  if(spaceSystem.following){
+    spaceSystem.following = false;
+  } else {
+    spaceSystem.following = true;
   }
 }

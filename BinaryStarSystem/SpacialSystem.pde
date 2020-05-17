@@ -2,26 +2,50 @@ import java.util.Random;
 
 class SpacialSystem {
   
+  public boolean following;
   private SpacialBody[] bodiesArray;
   private float centreX, centreY;
   private PVector COMVector;
+  private PVector origin = new PVector(width/2, height/2); //origin vector for center of screen
   
   public SpacialSystem(int n){
     bodiesArray = new SpacialBody[n];
     
-    bodiesArray[0] = new SpacialBody(100, "Body", Colour, width/2, (height/2)+100, this);
-    bodiesArray[1] = new SpacialBody(150, "Body", Colour, width/2, (height/2)-100, this);
+    for(int i=0; i<bodiesArray.length; i++){
+      bodiesArray[i] = new SpacialBody(100, "Body", Colour, width/2, (height/2)+100-200*i, this);
+    }
   }
   
-  public void display(){
-    calcCoM(); //first, calculate the new centre of mass for this frame
+  public void setMasses(float[] masses){
+    //set new mass values from slider input array
+    for(int i=0; i<bodiesArray.length; i++){
+      bodiesArray[i].setMass(masses[i]);
+    }
+  }
+  
+  public void display(){ //called every frame
+    calcCoM(); //calculate the new centre of mass for this frame
     displayCoM(); //set the new coordinates of the centre of mass cross
+    
     for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].calculateNewAcceleration(COMVector);
     }
+    
+    if(following){
+        //find the movement of the COM point and use it to re-center the system
+      PVector shiftVector = findCOMShift();
+      for(int i=0; i<bodiesArray.length; i++){
+        bodiesArray[i].movePosition(shiftVector);
+      }
+    }
+    
     for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].display();
     }
+  }
+  
+  private PVector findCOMShift(){
+    return COMVector.sub(origin);
   }
   
   private void calcCoM(){ // updates the position of the centre of mass of the system to centreX and centreY
@@ -44,6 +68,7 @@ class SpacialSystem {
   }
   
   private void displayCoM(){ //displays the centre of mass as a cross on the screen
+    stroke(0);
     line(centreX, centreY-10, centreX, centreY+10);
     line(centreX-10, centreY, centreX+10, centreY);
   }
