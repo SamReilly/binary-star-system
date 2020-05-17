@@ -49,6 +49,9 @@ class Slider {
     
     //draw the slider's main box
     rect(xPos, yPos, xSize, ySize);
+    //draw the slider's character into the box
+    fill(50);
+    text(this.sliderName, xPos+xSize/2.65, yPos+3*ySize/4);
     
     //reset stroke and fill
     stroke(0);
