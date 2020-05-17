@@ -1,8 +1,9 @@
 class SpacialBody{
   //output data
   private float mass;
-  private String name;
+  private char name;
   private color colour;
+  private boolean showName;
   
   //object data
   private float posX, posY;
@@ -10,7 +11,7 @@ class SpacialBody{
   private PVector acceleration;
   private SpacialSystem thisSystem;
   
-  public SpacialBody(float mass, String name, color colour, float posX, float posY, SpacialSystem thisSystem){
+  public SpacialBody(float mass, char name, color colour, float posX, float posY, SpacialSystem thisSystem){
     this.mass = mass;
     this.name = name;
     this.colour = colour;
@@ -58,14 +59,6 @@ class SpacialBody{
     return this.mass;
   }
   
-  public String getBodyName(){
-    return this.name;
-  }
-  
-  public void setBodyName(String name){
-    this.name = name;
-  }
-  
   public void display(){ //called every frame
     fill(colour);
     
@@ -75,6 +68,19 @@ class SpacialBody{
     posY+=velocity.y;
     
     ellipse(posX, posY, mass/15, mass/15); //draw the resultant point
+    if(showName){
+      //showName... TODO
+      fill(50);
+      text(this.name, posX+5+mass/15, posY-5-mass/15);
+    }
+  }
+  
+  public void toggleShowName(){
+    if(!showName){
+      this.showName = true;
+    } else {
+      this.showName = false;
+    }
   }
   
   //sets a new acceleration into the global variable

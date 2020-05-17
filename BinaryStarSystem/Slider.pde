@@ -1,6 +1,7 @@
 class Slider {
   //global variables
   private float scaleConstant; //used for scaling the output of the slider value
+  private char sliderName; //used to link a slider to the correnct spacial object
   
   //anchor for entire slider's positioning
   private float anchorX;
@@ -24,32 +25,41 @@ class Slider {
   
   private boolean selected = false; //is slider selected by user's mouse
   
-  Slider(float yAnchor, float xAnchor, float scaleConstant){
+  Slider(float yAnchor, float xAnchor, float scaleConstant, char name){
     this.anchorX = xAnchor;
     this.anchorY = yAnchor;
+    
     this.yPos = anchorY; //anchor x and y values for both boxes
     this.xPos = anchorX;
+    
     this.scaleConstant = scaleConstant;
+    this.sliderName = name;
   }
   
   void display(){ //called every frame
     fill(200); //fill = light gray
+    rect(anchorX+5, anchorY+8, sliderWidth+20, 5); //draw the slider's back bar
     
-    rect(anchorX+5, anchorY+8, sliderWidth+20, 5); //slider back bar
-    
+    //change the stroke to add a highlighted border if the slider is selected
     if(mouseIsOver()){
       stroke(240);
     } else {
       stroke(100);
     }
+    
+    //draw the slider's main box
     rect(xPos, yPos, xSize, ySize);
     
+    //reset stroke and fill
     stroke(0);
     fill(100);
   }
   
-  boolean mouseIsOver(){ //returns true if mouse is over slider 1
-    if(pmouseX > (xPos) && pmouseY > (yPos) && pmouseX < (xPos+xSize) && pmouseY < (yPos+ySize)){
+  boolean mouseIsOver(){ //returns true if mouse is over the slider
+    if(pmouseX > (xPos) &&
+    pmouseY > (yPos) &&
+    pmouseX < (xPos+xSize) &&
+    pmouseY < (yPos+ySize)){
       return true;
     } else {
       return false;

@@ -12,7 +12,7 @@ class SpacialSystem {
     bodiesArray = new SpacialBody[n];
     
     for(int i=0; i<bodiesArray.length; i++){
-      bodiesArray[i] = new SpacialBody(100, "Body", Colour, width/2, (height/2)+100-200*i, this);
+      bodiesArray[i] = new SpacialBody(100, findName(i), Colour, width/2, (height/2)+100-200*i, this);
     }
   }
   
@@ -20,6 +20,12 @@ class SpacialSystem {
     //set new mass values from slider input array
     for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].setMass(masses[i]);
+    }
+  }
+  
+  public void toggleShowName(){
+    for(int i=0; i<bodiesArray.length; i++){
+      bodiesArray[i].toggleShowName();
     }
   }
   
