@@ -1,9 +1,10 @@
 class Particle {
-  
+  //global variables
   private int frameLifeSpan;
   private int framesLeft;
   private PVector position;
   
+  //constructor method
   public Particle(PVector position, int frameLifeSpan){
     this.position = position;
     this.frameLifeSpan = frameLifeSpan;
@@ -20,10 +21,15 @@ class Particle {
     }
   }
   
-  public void draw() {
+  public void draw() { //called every frame
+    //set appearence variables
     stroke(150);
     fill(color(150));
+    
+    //find diameter according to how old the particle is
     float d = 6*((float)framesLeft/(float)frameLifeSpan);
+    
+    //draw the resulting circle
     ellipse(position.x, position.y, d, d);
   }
 }

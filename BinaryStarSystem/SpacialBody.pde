@@ -12,6 +12,7 @@ class SpacialBody{
   private SpacialSystem thisSystem;
   private int frameCounter;
   
+  //constructor method
   public SpacialBody(float mass, char name, color colour, float posX, float posY, SpacialSystem thisSystem){
     this.mass = mass;
     this.name = name;
@@ -24,6 +25,7 @@ class SpacialBody{
     this.frameCounter = 0;
   }
   
+  //returns direction and velocity to start moving with at the beginning of a scene
   public PVector findStartingVelocity() {
     PVector centre = new PVector(width/2, height/2);
     PVector position = new PVector(this.posX, this.posY);
@@ -69,7 +71,6 @@ class SpacialBody{
     
     ellipse(posX, posY, mass/15, mass/15); //draw the resultant point
     if(showName){
-      //showName... TODO
       fill(50);
       text(this.name, posX+5+mass/15, posY-5-mass/15);
     }
@@ -82,6 +83,7 @@ class SpacialBody{
     }
   }
   
+  //toggles identifiers on and off
   public void toggleShowName(){
     if(!showName){
       this.showName = true;
@@ -95,7 +97,7 @@ class SpacialBody{
     PVector thisCOM = new PVector(COM.x, COM.y); //create new instance of COM vector to not modify main one
     //calculate force vector caused by the centre of mass
     //F = gmm/r^2
-    final float g = 1; //to be changed
+    final float g = 1;
     float m1 = this.mass; //find both masses
     float m2 = thisSystem.getSystemMass();
     
@@ -111,11 +113,12 @@ class SpacialBody{
     float a = f/m1;
     PVector aDirection = PVector.fromAngle(radiusVector.heading());
     drawVector(aDirection);
-    acceleration = aDirection.mult(a);
     
     //set the acceleration vector to global variable
+    acceleration = aDirection.mult(a);
   }
   
+  //draws a line to indicate a vector on screen
   private void drawVector(PVector input){
     stroke(0);
     line(posX, posY, posX+(input.x*30), posY+(input.y*30));

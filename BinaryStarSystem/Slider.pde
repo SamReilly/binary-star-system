@@ -71,14 +71,10 @@ class Slider {
   
   void mousePressed(){ //on click
     if(mouseIsOver()){ //box clicked
-      selected = true; //select this slider for movement
-      tempMousePosX = pmouseX; //Store mouse x position
+      tempMousePosX = pmouseX; //Store mouse x pos
       tempBoxPosX = xPos; //Store temporary constant x position
+      selected = true; //select this slider for movement
     }
-  }
-  
-  void mouseReleased(){
-    selected = false;
   }
   
   void mouseDragged(){
@@ -96,14 +92,19 @@ class Slider {
     }
   }
   
+  void mouseReleased(){
+    selected = false; //deselect slider
+  }
+  
   public float getSlider(){ //getter for slider values
+    //set ranges
     float maxPosition = anchorX + float(sliderWidth);
     float minPosition = anchorX;
     float range = maxPosition-minPosition; //range of the slider
-    float normalisedValue;
     
+    float normalisedValue;
     normalisedValue = (xPos-minPosition)/range;
       
-    return (normalisedValue * scaleConstant)+100;
+    return (normalisedValue * scaleConstant)+100; //return result
   }
 }

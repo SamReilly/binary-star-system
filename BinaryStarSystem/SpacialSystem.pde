@@ -1,13 +1,14 @@
 import java.util.Random;
 
 class SpacialSystem {
-  
+  //global variables
   public boolean following;
   private SpacialBody[] bodiesArray;
   private float centreX, centreY;
   private PVector COMVector;
   private PVector origin = new PVector(width/2, height/2); //origin vector for center of screen
   
+  //constructor method
   public SpacialSystem(int n){
     bodiesArray = new SpacialBody[n];
     
@@ -16,6 +17,7 @@ class SpacialSystem {
     }
   }
   
+  //returns a valid position to start the input body in
   private PVector findPosition(int number, int index) {
     //find the correct angled unit vector
     PVector angledUnit = PVector.fromAngle((float)(2f*Math.PI*index/number));
@@ -35,6 +37,7 @@ class SpacialSystem {
     }
   }
   
+  //toggles names on and off
   public void toggleShowName(){
     for(int i=0; i<bodiesArray.length; i++){
       bodiesArray[i].toggleShowName();
@@ -62,6 +65,7 @@ class SpacialSystem {
     }
   }
   
+  //returns the change in position of the centre of mass for tracking
   private PVector findCOMShift(){
     return COMVector.sub(origin);
   }
@@ -91,6 +95,7 @@ class SpacialSystem {
     line(centreX-10, centreY, centreX+10, centreY);
   }
   
+  //returns the total system's mass for newton's formula
   public float getSystemMass() {
     float totalMass = 0;
     for(int i=0; i<bodiesArray.length; i++){
