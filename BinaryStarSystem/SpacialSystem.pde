@@ -12,8 +12,20 @@ class SpacialSystem {
     bodiesArray = new SpacialBody[n];
     
     for(int i=0; i<bodiesArray.length; i++){
-      bodiesArray[i] = new SpacialBody(100, findName(i), Colour, width/2, (height/2)+100-200*i, this);
+      bodiesArray[i] = new SpacialBody(100, findName(i), Colour, findPosition(n, i).x, findPosition(n, i).y, this);
     }
+  }
+  
+  private PVector findPosition(int number, int index) {
+    //find the correct angled unit vector
+    PVector angledUnit = PVector.fromAngle((float)(2f*Math.PI*index/number));
+    angledUnit.normalize();
+    
+    //multiply it to scale
+    angledUnit.mult(100+number*15);
+    
+    //add the vector to the central coordinates
+    return angledUnit.add(new PVector(width/2, height/2));
   }
   
   public void setMasses(float[] masses){

@@ -61,8 +61,8 @@ class PopulationController {
     }
     
     //maintain within the range
-    if(currentValue < 0){
-      currentValue = 0;
+    if(currentValue < 2){
+      currentValue = 2;
     } else if(currentValue > 8){
       currentValue = 8;
     }

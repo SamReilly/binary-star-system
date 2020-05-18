@@ -10,6 +10,7 @@ class SpacialBody{
   private PVector velocity;
   private PVector acceleration;
   private SpacialSystem thisSystem;
+  private int frameCounter;
   
   public SpacialBody(float mass, char name, color colour, float posX, float posY, SpacialSystem thisSystem){
     this.mass = mass;
@@ -20,17 +21,16 @@ class SpacialBody{
     this.velocity = findStartingVelocity();
     this.acceleration = PVector.random2D().mult(0);
     this.thisSystem = thisSystem;
+    this.frameCounter = 0;
   }
   
   public PVector findStartingVelocity() {
-    float midY = height/2;
-    if(posY > midY){ //if below centre of mass
-      //start moving to the left
-      return new PVector(-1, 0);
-    } else {
-      //start moving to the right
-      return new PVector(1, 0);
-    }
+    PVector centre = new PVector(width/2, height/2);
+    PVector position = new PVector(this.posX, this.posY);
+    PVector relativePosition = position.sub(centre); //find the vector from the position to centre of the screen
+    
+    relativePosition.normalize().rotate(HALF_PI).mult(1.2);
+    return relativePosition;
   }
   
   public void setPosition(float X, float Y){
@@ -72,6 +72,13 @@ class SpacialBody{
       //showName... TODO
       fill(50);
       text(this.name, posX+5+mass/15, posY-5-mass/15);
+    }
+    
+    if(frameCounter < 18){ //if still counting to target
+      frameCounter += 1; //count
+    } else {
+      frameCounter = 0; //reset the count
+      particleController.makeParticle(new PVector(posX, posY)); //Create a particle
     }
   }
   
